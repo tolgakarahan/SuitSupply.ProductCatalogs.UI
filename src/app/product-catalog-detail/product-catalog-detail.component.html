@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-xs-12">
+            <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+            </div>
+
+            <app-alert 
+                [messages]="messages" 
+                *ngIf="messages" 
+                (confirmed)="onConfirmed()"
+                (canceled)="onCanceled()"
+                (close)="onAlertClosed()"
+                [isConfirmationAlert]="isConfirmationAlert"
+            ></app-alert>
+        <form [formGroup]="productCatalogForm" (ngSubmit)="onSubmitStart()">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" [disabled]="!productCatalogForm.valid" class="btn btn-success">Save</button>
+                    <button type="button" (click)="onCancel()" class="btn btn-warning">Cancel</button>                   
+                    <button type="button" *ngIf="id" (click)="onDeleteStart()" class="btn btn-danger">Delete</button>                   
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="code">Code</label>
+                        <input type="text" id="Code" (change)="requiredValueChanged('code')" class="form-control" formControlName="code">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="Name" (change)="requiredValueChanged('name')" class="form-control" formControlName="name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="text" id="Price" (change)="priceValueChangeCompleted()" (ngModelChange)="priceValueChanged($event)" class="form-control" formControlName="price" >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="photo">Photo</label>
+                        <input type="text" id="Photo" class="form-control" formControlName="photo" #imagePath>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-xs-12">
+                         <img [src]="imagePath.value" class="img-responsive">
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>

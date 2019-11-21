@@ -1,0 +1,39 @@
+<div class="container">  
+    <app-alert 
+      [messages]="messages" 
+      *ngIf="messages" 
+      (close)="onAlertClosed()"
+      [isConfirmationAlert]="false"
+    ></app-alert>
+    <h4>Product Catalog List</h4>
+    <app-serch></app-serch>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Last Update</th>
+          <th>Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="tr-pointer" (click)="onProductCatalogClick(productCatalog.id)" *ngFor="let productCatalog of productCatalogList;let i = index" >
+          <td class="middle-align">{{productCatalog.id}}</td>
+          <td class="middle-align">{{productCatalog.code}}</td>
+          <td class="middle-align">{{productCatalog.name}}</td>
+          <td class="middle-align">{{productCatalog.price}}</td>
+          <td class="middle-align">{{productCatalog.lastUpdate?.toLocaleString()}}</td>
+          <td class="middle-align">  
+            <img [src]="productCatalog.photo" 
+            [alt]="productCatalog.name" 
+            class="img-responsive" style="max-height: 80px;"> 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="isLoading" style="text-align: center;">
+        <app-loading-spinner></app-loading-spinner>
+    </div>
+  </div>

@@ -1,0 +1,11 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+  <p *ngFor="let message of messages" >{{ message }}</p>
+  <div class="alert-box-actions">
+    <button *ngIf="!isConfirmationAlert" class="btn btn-primary" (click)="onClose()">Close</button>
+    <div *ngIf="isConfirmationAlert">
+      <button class="btn btn-success" (click)="onConfirmed()">Yes</button>
+      <button class="btn btn-warning" (click)="onCanceled()">No</button>
+    </div>
+  </div>
+</div>
